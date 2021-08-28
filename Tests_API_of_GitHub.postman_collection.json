@@ -1,0 +1,1181 @@
+{
+	"info": {
+		"_postman_id": "0adbd738-e9ff-4db5-93d5-4867b4392aad",
+		"name": "Tests_API_of_GitHub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a Repository",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"repository_name\", getRandomRepositoryName());\r",
+							"\r",
+							"function getRandomRepositoryName() {\r",
+							"    const repositoryName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);\r",
+							"    console.log(repositoryName);\r",
+							"    return repositoryName; \r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"repository_id\", response.id);\r",
+							"\r",
+							"pm.test(\"Repository - repository_name\", function () {\r",
+							"    pm.expect(response.name).to.eql(pm.environment.get(\"repository_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - full_name\", function () {\r",
+							"   pm.expect(response.full_name).to.eql(pm.environment.get(\"owner\")+\"/\"+pm.environment.get(\"repository_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - owner\", function () {\r",
+							"    pm.expect(response.owner.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - private\", function () {\r",
+							"    pm.expect(response.private).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - owner.type\", function () {\r",
+							"    pm.expect(response.owner.type).to.eql(\"User\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - fork\", function () {\r",
+							"    pm.expect(response.fork).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - homepage\", function () {\r",
+							"    pm.expect(response.homepage).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - size\", function () {\r",
+							"    pm.expect(response.size).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - stargazers_count\", function () {\r",
+							"    pm.expect(response.stargazers_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - watchers_count\", function () {\r",
+							"    pm.expect(response.watchers_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - language\", function () {\r",
+							"        pm.expect(response.language).to.eql(null);\r",
+							"});\r",
+							"    \r",
+							"pm.test(\"Repository - has_issues\", function () {\r",
+							"    pm.expect(response.has_issues).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_projects\", function () {\r",
+							"    pm.expect(response.has_projects).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_downloads\", function () {\r",
+							"    pm.expect(response.has_downloads).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_wiki\", function () {\r",
+							"    pm.expect(response.has_wiki).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_pages\", function () {\r",
+							"    pm.expect(response.has_pages).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - forks_count\", function () {\r",
+							"    pm.expect(response.forks_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - mirror_url\", function () {\r",
+							"    pm.expect(response.mirror_url).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - archived\", function () {\r",
+							"    pm.expect(response.archived).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - disabled\", function () {\r",
+							"    pm.expect(response.disabled).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - open_issues_count\", function () {\r",
+							"    pm.expect(response.open_issues_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - license\", function () {\r",
+							"    pm.expect(response.license).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - forks\", function () {\r",
+							"    pm.expect(response.forks).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - open_issues\", function () {\r",
+							"    pm.expect(response.open_issues).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - watchers\", function () {\r",
+							"    pm.expect(response.watchers).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - default_branch\", function () {\r",
+							"    pm.expect(response.default_branch).to.eql(\"main\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - network_count\", function () {\r",
+							"    pm.expect(response.network_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - subscribers_count\", function () {\r",
+							"    pm.expect(response.subscribers_count).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - permissions.admin\", function () {\r",
+							"    pm.expect(response.permissions.admin).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - permissions.push\", function () {\r",
+							"    pm.expect(response.permissions.push).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - permissions.pull\", function () {\r",
+							"    pm.expect(response.permissions.pull).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - allow_merge_commit\", function () {\r",
+							"    pm.expect(response.allow_merge_commit).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - allow_rebase_merge\", function () {\r",
+							"    pm.expect(response.allow_rebase_merge).to.eql(true);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.github.nebula-preview+json",
+						"type": "text"
+					},
+					{
+						"key": "X-GitHub-OTP",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{repository_name}}\",\r\n    \"description\": \"{{repository_description}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Created Repository",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Repository - id\", function () {\r",
+							"    pm.expect(response.id).to.eql(pm.environment.get(\"repository_id\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - repository_name\", function () {\r",
+							"    pm.expect(response.name).to.eql(pm.environment.get(\"repository_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - full_name\", function () {\r",
+							"    pm.expect(response.full_name).to.eql(pm.environment.get(\"owner\")+\"/\"+pm.environment.get(\"repository_name\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - owner.login\", function () {\r",
+							"    pm.expect(response.owner.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - private\", function () {\r",
+							"    pm.expect(response.private).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - owner.type\", function () {\r",
+							"    pm.expect(response.owner.type).to.eql(\"User\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - fork\", function () {\r",
+							"    pm.expect(response.fork).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - homepage\", function () {\r",
+							"    pm.expect(response.homepage).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - size\", function () {\r",
+							"    pm.expect(response.size).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - stargazers_count\", function () {\r",
+							"    pm.expect(response.stargazers_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - watchers_count\", function () {\r",
+							"   pm.expect(response.watchers_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - language\", function () {\r",
+							"    pm.expect(response.language).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_issues\", function () {\r",
+							"    pm.expect(response.has_issues).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_projects\", function () {\r",
+							"        pm.expect(response.has_projects).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_downloads\", function () {\r",
+							"    pm.expect(response.has_downloads).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_wiki\", function () {\r",
+							"    pm.expect(response.has_wiki).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - has_pages\", function () {\r",
+							"    pm.expect(response.has_pages).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - forks_count\", function () {\r",
+							"    pm.expect(response.forks_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - mirror_url\", function () {\r",
+							"    pm.expect(response.mirror_url).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - archived\", function () {\r",
+							"    pm.expect(response.archived).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - disabled\", function () {\r",
+							"    pm.expect(response.disabled).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - open_issues_count\", function () {\r",
+							"    pm.expect(response.open_issues_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - license\", function () {\r",
+							"    pm.expect(response.license).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - forks\", function () {\r",
+							"    pm.expect(response.forks).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - open_issues\", function () {\r",
+							"    pm.expect(response.open_issues).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - watchers\", function () {\r",
+							"    pm.expect(response.watchers).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - default_branch\", function () {\r",
+							"    pm.expect(response.default_branch).to.eql(\"main\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - network_count\", function () {\r",
+							"    pm.expect(response.network_count).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - subscribers_count\", function () {\r",
+							"    pm.expect(response.subscribers_count).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - permissions.admin\", function () {\r",
+							"    pm.expect(response.permissions.admin).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - permissions.push\", function () {\r",
+							"    pm.expect(response.permissions.push).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - permissions.pull\", function () {\r",
+							"    pm.expect(response.permissions.pull).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - allow_merge_commit\", function () {\r",
+							"   pm.expect(response.allow_merge_commit).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Repository - allow_rebase_merge\", function () {\r",
+							"    pm.expect(response.allow_rebase_merge).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.environment.unset(\"repository_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.github.v3+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an Issue",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"issue_number\", response.number);\r",
+							"pm.environment.set(\"issue_id\", response.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - issue_title\", function() {\r",
+							"    pm.expect(response.title).to.eql(pm.environment.get(\"issue_title\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - owner\", function() {\r",
+							"    pm.expect(response.user.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - open\", function() {\r",
+							"    pm.expect(response.state).to.eql(\"open\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - locked\", function () {\r",
+							"    pm.expect(response.locked).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - assignee\", function() {\r",
+							"    pm.expect(response.assignee).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - comments\", function() {\r",
+							"    pm.expect(response.comments).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - closed_at\", function() {\r",
+							"    pm.expect(response.closed_at).to.eql(null);\r",
+							"    pm.expect(response.closed_by).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - closed_by\", function() {\r",
+							"    pm.expect(response.closed_by).to.eql(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.github.v3+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"{{issue_title}}\",\r\n    \"body\": \"{{issue_body}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Created Issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - id\", function () {\r",
+							"    pm.expect(response.id).to.eql(pm.environment.get(\"issue_id\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - number\", function () {\r",
+							"    pm.expect(response.number).to.eql(pm.environment.get(\"issue_number\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - title\", function () {\r",
+							"    pm.expect(response.title).to.eql(pm.environment.get(\"issue_title\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - user.login\", function () {\r",
+							"    pm.expect(response.user.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - user.type\", function () {\r",
+							"    pm.expect(response.user.type).to.eql(\"User\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - user.site_admin\", function () {\r",
+							"    pm.expect(response.user.site_admin).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - state\", function () {\r",
+							"    pm.expect(response.state).to.eql(\"open\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - locked\", function () {\r",
+							"    pm.expect(response.locked).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - assignee\", function () {\r",
+							"    pm.expect(response.assignee).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - milestone\", function () {\r",
+							"    pm.expect(response.milestone).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - comments\", function () {\r",
+							"    pm.expect(response.comments).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - closed_at\", function () {\r",
+							"    pm.expect(response.closed_at).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - active_lock_reason\", function () {\r",
+							"    pm.expect(response.active_lock_reason).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - closed_by\", function () {\r",
+							"    pm.expect(response.closed_by).to.eql(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues/:issue_number",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues",
+						":issue_number"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						},
+						{
+							"key": "issue_number",
+							"value": "{{issue_number}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Issue's Comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"issue_comment_id\",response.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - user.login\", function () {\r",
+							"    pm.expect(response.user.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - user.type\", function () {\r",
+							"    pm.expect(response.user.type).to.eql(\"User\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - user.site_admin\", function () {\r",
+							"    pm.expect(response.user.site_admin).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - body\", function () {\r",
+							"    pm.expect(response.body).to.eql(pm.environment.get(\"comment_body\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.github.v3+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"body\":\"{{comment_body}}\"}"
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues/:issue_number/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues",
+						":issue_number",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						},
+						{
+							"key": "issue_number",
+							"value": "{{issue_number}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Issue's Comments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const issue = response.find(item => item.id === pm.environment.get(\"issue_comment_id\"));\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - id\", function () {\r",
+							"    pm.expect(issue.id).to.eql(pm.environment.get(\"issue_comment_id\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - user.login\", function () {\r",
+							"    pm.expect(issue.user.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - user.type\", function () {\r",
+							"    pm.expect(issue.user.type).to.eql(\"User\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - user.site_admin\", function () {\r",
+							"    pm.expect(issue.user.site_admin).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue's comment - body\", function () {\r",
+							"    pm.expect(issue.body).to.eql(pm.environment.get(\"comment_body\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues/:issue_number/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues",
+						":issue_number",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						},
+						{
+							"key": "issue_number",
+							"value": "{{issue_number}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Issue After Create a Comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - id\", function () {\r",
+							"    pm.expect(response.id).to.eql(pm.environment.get(\"issue_id\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - number\", function () {\r",
+							"    pm.expect(response.number).to.eql(pm.environment.get(\"issue_number\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - title\", function () {\r",
+							"    pm.expect(response.title).to.eql(pm.environment.get(\"issue_title\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - user.login\", function () {\r",
+							"    pm.expect(response.user.login).to.eql(pm.environment.get(\"owner\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - user.type\", function () {\r",
+							"    pm.expect(response.user.type).to.eql(\"User\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - user.site_admin\", function () {\r",
+							"    pm.expect(response.user.site_admin).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - state\", function () {\r",
+							"    pm.expect(response.state).to.eql(\"open\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - locked\", function () {\r",
+							"    pm.expect(response.locked).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - assignee\", function () {\r",
+							"    pm.expect(response.assignee).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - milestone\", function () {\r",
+							"    pm.expect(response.milestone).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - comments\", function () {\r",
+							"    pm.expect(response.comments).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - closed_at\", function () {\r",
+							"    pm.expect(response.closed_at).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - active_lock_reason\", function () {\r",
+							"    pm.expect(response.active_lock_reason).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Issue - closed_by\", function () {\r",
+							"    pm.expect(response.closed_by).to.eql(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues/:issue_number",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues",
+						":issue_number"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						},
+						{
+							"key": "issue_number",
+							"value": "{{issue_number}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List branches",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/branches",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"branches"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Created Repository",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.environment.unset(\"issue_number\");\r",
+							"pm.environment.unset(\"issue_id\");\r",
+							"pm.environment.unset(\"repository_name\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.github.nebula-preview+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Deleted Repository Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Repository - message\", function () {\r",
+							"    pm.expect(response.message).to.eql(\"Not Found\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{personal_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.github.v3+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{owner}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repository_name}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
