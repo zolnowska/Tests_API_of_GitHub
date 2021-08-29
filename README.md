@@ -8,8 +8,8 @@
 * Personal access token to GitHub account with access to repo and delete_repo
 
 ### Pre-request
-* In the file "Tests API of GitHub.postman_environment.json" exchange value "YOUR_PERSONAL_TOKEN" into personal access token to GitHub acconut with access to repo and delete_repo
-* In the file "Tests API of GitHub.postman_environment.json" exchange value "NAME_OF_YOUR_GITHUB_ACC" into name of owner account to which belong personal access token from step above
+* In the file "Tests_API_of_GitHub.postman_environment.json" exchange value "YOUR_PERSONAL_TOKEN" into personal access token to GitHub acconut with access to repo and delete_repo
+* In the file "Tests_API_of_GitHub.postman_environment.json" exchange value "NAME_OF_YOUR_GITHUB_ACC" into name of owner account to which belong personal access token from step above
 
 ### How to run tests
-* Enter into folder where this repository is cloned and into cmd input this command: newman run "Tests API of GitHub.postman_collection.json" -e "Tests API of GitHub.postman_environment.json"
+* Enter into folder where this repository is cloned and into cmd input this command: newman run "Tests_API_of_GitHub.postman_collection.json" -e "Tests_API_of_GitHub.postman_environment.json"
