@@ -1,0 +1,44 @@
+[
+  {
+    "repository_description": "This is a test repository created by Postman",
+    "issue_title": "Found a bug",
+    "issue_body": "This issue has been automatically created by Postman.",
+    "comment_body": "Thank you for reporting this issue. I will look into it as soon as possible.",
+    "is_valid": "true"
+  },
+  {
+      "repository_description": "A",
+      "issue_title": "z",
+      "issue_body": "1",
+      "comment_body": "o",
+      "is_valid": "true"
+  },
+  {
+    "repository_description": "Sprawdzę polskie akcenty ąśćź",
+    "issue_title": "Źdźbło trawy",
+    "issue_body": "Ten błąd jest krytyczny",
+    "comment_body": "Ten błąd obniża ilość odwiedzin naszej strony",
+    "is_valid": "true"
+  },
+  {
+      "repository_description": "",
+      "issue_title": "",
+      "issue_body": "",
+      "comment_body": "",
+      "is_valid": "false"
+  },
+  {
+    "repository_description": "12",
+    "issue_title": "11234567890",
+    "issue_body": "0",
+    "comment_body": "-123",
+    "is_valid": "true"
+  },
+  {
+      "repository_description": null,
+      "issue_title": null,
+      "issue_body": null,
+      "comment_body": null,
+      "is_valid": "true"
+  }
+]
