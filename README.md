@@ -12,4 +12,4 @@
 * In the file "Tests_API_of_GitHub.postman_environment.json" exchange value "NAME_OF_YOUR_GITHUB_ACC" into name of owner account to which belong personal access token from step above
 
 ### How to run tests
-* Enter into folder where this repository is cloned and into cmd input this command: newman run "Tests_API_of_GitHub.postman_collection.json" -e "Tests_API_of_GitHub.postman_environment.json"
+* Enter into folder where this repository is cloned and into cmd input this command: newman run Tests_API_of_GitHub.postman_collection.json -e Tests_API_of_GitHub.postman_environment.json -d data.json
